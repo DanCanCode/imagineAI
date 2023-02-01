@@ -12,18 +12,34 @@ import DiamondIcon from "@mui/icons-material/Diamond";
 import SearchIcon from "@mui/icons-material/Search";
 import { pink } from "@mui/material/colors";
 import background from "./background.jpg";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchImages } from "./redux/images";
+import { createImage } from "./redux/singleImage";
 
 function App() {
   const [prompt, setPrompt] = useState("");
   const getTime = () => {};
 
+  const dispatch = useDispatch();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await dispatch(createImage(prompt));
+  };
+
+  // useEffect(() => {
+  // getTime();
+  //   dispatch(fetchImages());
+  // }, []);
+
+  const images = useSelector((state) => state.images);
+  const singleImage = useSelector((state) => state.singleImage);
   return (
-    <Box>
+    <Box sx={{ height: "100vh" }}>
       <Box
         sx={{
           backgroundImage: `url(${background})`,
           backgroundRepeat: "no-repeat",
-          height: "40vw",
+          height: "60%",
           position: "relative",
         }}
       >
@@ -120,8 +136,12 @@ function App() {
                   borderRadius: "6px",
                 }}
               />
-              <Button variant="contained">Search</Button>
+              <Button variant="contained" onClick={handleSubmit}>
+                Search
+              </Button>
             </Box>
+
+            {singleImage ? <img src={singleImage} alt={prompt} /> : <></>}
           </Box>
         </Container>
 
@@ -149,7 +169,11 @@ function App() {
             Previous Submissions
           </Typography>
 
-          {/* array.map */}
+          <Box sx={{ display: "grid" }}>
+            {/* images.map((image) => {
+
+          }) */}
+          </Box>
         </Container>
       </Box>
     </Box>
