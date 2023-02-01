@@ -6,6 +6,7 @@ import {
   InputAdornment,
   Button,
 } from "@mui/material";
+import { useState, useEffect } from "react";
 import AccessTimeFilledIcon from "@mui/icons-material/AccessTimeFilled";
 import DiamondIcon from "@mui/icons-material/Diamond";
 import SearchIcon from "@mui/icons-material/Search";
@@ -13,6 +14,9 @@ import { pink } from "@mui/material/colors";
 import background from "./background.jpg";
 
 function App() {
+  const [prompt, setPrompt] = useState("");
+  const getTime = () => {};
+
   return (
     <Box>
       <Box
@@ -20,11 +24,14 @@ function App() {
           backgroundImage: `url(${background})`,
           backgroundRepeat: "no-repeat",
           height: "40vw",
+          position: "relative",
         }}
       >
-        <Container>
+        <Container sx={{ position: "relative", zIndex: 1400, height: "100%" }}>
           <Box
             sx={{
+              position: "relative",
+              zIndex: 1400,
               flexGrow: 1,
               display: "flex",
               pt: 2,
@@ -32,38 +39,117 @@ function App() {
               alignItems: "center",
             }}
           >
-            <Typography variant="h4" fontWeight="medium">
+            <Typography
+              variant="h4"
+              fontWeight="medium"
+              color="#fff"
+              sx={{
+                textAlign: "center",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "5%",
+              }}
+            >
               <DiamondIcon fontSize="large" sx={{ color: pink[500] }} />
               imagineAI
             </Typography>
 
-            <Typography variant="h4" fontWeight="medium">
+            <Typography
+              variant="h4"
+              fontWeight="medium"
+              color="#fff"
+              sx={{
+                textAlign: "center",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "5%",
+              }}
+            >
               <AccessTimeFilledIcon fontSize="large" /> Time
             </Typography>
           </Box>
 
           <Box
             sx={{
+              position: "absolute",
+              right: 0,
+              left: 0,
+              top: 0,
+              bottom: 0,
+              margin: "auto",
+
               display: "flex",
+              gap: "5%",
+              flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
+              height: "100%",
             }}
           >
-            <TextField
-              id="outlined-basic"
-              placeholder="e.g.: dog surfing on the moon."
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
+            <Typography variant="h5" fontWeight="bold" color="#fff">
+              Generate your imagination into reality. <br /> Just one prompt
+              away.
+            </Typography>
+
+            <Box
+              sx={{
+                display: "flex",
+                gap: "1%",
+                width: "100%",
+                justifyContent: "center",
+                alignItems: "center",
               }}
-              variant="outlined"
-              sx={{ width: "50%" }}
-            />
-            <Button>Search</Button>
+            >
+              <TextField
+                onChange={(e) => setPrompt(e.target.value)}
+                id="outlined-basic"
+                placeholder="e.g.: dog surfing on the moon."
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <SearchIcon />
+                    </InputAdornment>
+                  ),
+                }}
+                variant="outlined"
+                sx={{
+                  width: "50%",
+                  backgroundColor: "#fff",
+                  borderRadius: "6px",
+                }}
+              />
+              <Button variant="contained">Search</Button>
+            </Box>
           </Box>
+        </Container>
+
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.7)",
+          }}
+        />
+      </Box>
+
+      <Box padding="20px">
+        <Container
+          sx={{
+            display: "flex",
+            flexDirection: "flex-row",
+            justifyContent: "center",
+          }}
+        >
+          <Typography variant="h5" fontWeight="medium">
+            Previous Submissions
+          </Typography>
+
+          {/* array.map */}
         </Container>
       </Box>
     </Box>
